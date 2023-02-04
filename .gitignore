@@ -6,6 +6,7 @@ size 35
 /Library
 /Logs
 /obj
+/.vs
 
 /*.csproj
 /*.sln

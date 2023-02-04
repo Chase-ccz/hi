@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         CheckGround();
         SwitchAnimation();
+        //Attack();
     }
 
     void CheckGround()
@@ -87,6 +88,14 @@ public class PlayerController : MonoBehaviour
             
         }
     }
+
+    //void Attack()
+    //{
+    //    if (Input.GetButtonDown("Attack"))
+    //    {
+    //        myAnim.SetTrigger("Attack");
+    //    }
+    //}
 
     void SwitchAnimation()
     {

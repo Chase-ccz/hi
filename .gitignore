@@ -5,3 +5,8 @@ size 35
 /UserSettings
 /Library
 /Logs
+/obj
+
+/*.csproj
+/*.sln
+/*.vsconfig

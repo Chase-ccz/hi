@@ -30,6 +30,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+
      void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -37,5 +38,6 @@ public class PlayerAttack : MonoBehaviour
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
+
 
 }

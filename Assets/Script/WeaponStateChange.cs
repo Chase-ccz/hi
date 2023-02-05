@@ -29,7 +29,7 @@ public class WeaponStateChange : MonoBehaviour
 
     public void Switcher()
     {
-        if (Input.GetButtonDown("Switch"))
+        if (Input.GetButtonDown("Switch") || Input.touchCount == 2)
         {
             circleRenderer.enabled = !circleRenderer.enabled;
             triangleRenderer.enabled = !triangleRenderer.enabled;

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpSpeed;
     public float doubleJumpSpeed;
+    public Joystick joystick;
 
     private Rigidbody2D myRigidbody;
     private Animator myAnim;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private bool isGround;
     private bool canDoubleJump;
     private PlayerHealth playerHealth;
+
+    Vector2 m_scenePos = new Vector2();
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +34,22 @@ public class PlayerController : MonoBehaviour
         if(playerHealth.health > 0)
         {
             Run();
+            //if(Input.touchCount == 1)
+            //{
+            //    if(Input.touches[0].phase == TouchPhase.Began)
+            //    {
+            //        m_scenePos = Input.touches[0].position;
+            //    }
+            //    if(Input.touches[0].phase == TouchPhase.Ended)
+            //    {
+            //        if(Input.touches[0].position == m_scenePos)
+            //        {
+            //            Jump();
+            //        }
+            //    }
+            //}
             Jump();
+            Debug.Log(joystick.Vertical);
         }
         
         CheckGround();
@@ -64,7 +82,8 @@ public class PlayerController : MonoBehaviour
 
     void Run()
     {
-        float moveDir = Input.GetAxis("Horizontal");
+        //float moveDir = Input.GetAxis("Horizontal");
+        float moveDir = joystick.Horizontal;
         Vector2 playerVel = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVel;
         bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
@@ -73,14 +92,15 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        //if (Input.GetButtonDown("Jump"))
+        if(joystick.Vertical >= 0.9)
         {
             if (isGround)
             {
                 myAnim.SetBool("Jump", true);
                 Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
                 myRigidbody.velocity = Vector2.up * jumpVel;
-                canDoubleJump = true;
+                canDoubleJump = false; //Ä¬ÈÏ½ûÓÃ¶þ¶ÎÌø
             }
             else
             {

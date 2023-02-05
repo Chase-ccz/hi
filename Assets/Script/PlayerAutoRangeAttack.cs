@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerAutoRangeAttack : MonoBehaviour
 {
     public GameObject bullet;
+    public float shootFreq;
 
     private WeaponStateChange weaponState;
     private float timer;
+    private BoxCollider2D myBoxCollider;
+    private PlayerHealth playerHealth;
     // Start is called before the first frame update
     void Start()
     {
         weaponState = GameObject.FindGameObjectWithTag("WeaponState").GetComponent<WeaponStateChange>();
+        myBoxCollider = GetComponent<BoxCollider2D>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
 
     }
 
@@ -29,15 +34,22 @@ public class PlayerAutoRangeAttack : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") && weaponState.weaponType == "range")
+        if (other.gameObject.CompareTag("Enemy") && weaponState.weaponType == "range" )
         {
-            timer += Time.deltaTime;
-            if(timer > 2)
+            if(playerHealth.health > 0)
             {
                 Shoot();
+
+                StartCoroutine(ShootFreq());
             }
-            //StartCoroutine(Attack());
-            //Shoot();
+            
         }
+    }
+
+    IEnumerator ShootFreq()
+    {
+        myBoxCollider.enabled = false;
+        yield return new WaitForSeconds(shootFreq);
+        myBoxCollider.enabled = true;
     }
 }

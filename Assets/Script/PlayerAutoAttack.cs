@@ -12,6 +12,7 @@ public class PlayerAutoAttack : MonoBehaviour
     private WeaponStateChange weaponState;
     private float timer;
     private Collider2D enemyInRange;
+    private PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class PlayerAutoAttack : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         weaponState = GameObject.FindGameObjectWithTag("WeaponState").GetComponent<WeaponStateChange>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -32,15 +34,20 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Enemy") && weaponState.weaponType == "melee")
         {
-            //StartCoroutine(Attack());
-            anim.SetTrigger("Attack");
+            if(playerHealth.health > 0)
+            {
+                anim.SetTrigger("Attack");
+                StartCoroutine(Attack());
+            }
+            
         }
     }
 
 
-    //IEnumerator Attack()
-    //{
-    //    anim.SetTrigger("Attack");
-    //    yield return new WaitForSeconds(waitTime);
-    //}
+    IEnumerator Attack()
+    {
+        collider2D.enabled = false;
+        yield return new WaitForSeconds(waitTime);
+        collider2D.enabled = true;
+    }
 }

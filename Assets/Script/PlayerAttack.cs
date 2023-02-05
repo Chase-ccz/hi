@@ -19,16 +19,16 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        //Attack();
     }
 
-    void Attack()
-    {
-        if (Input.GetButtonDown("Attack"))
-        {
-            anim.SetTrigger("Attack");
-        }
-    }
+    //void Attack()
+    //{
+    //    if (Input.GetButtonDown("Attack"))
+    //    {
+    //        anim.SetTrigger("Attack");
+    //    }
+    //}
 
 
      void OnTriggerEnter2D(Collider2D other)

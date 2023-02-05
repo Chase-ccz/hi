@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private Rigidbody2D rb;
     public float bulletSpeed;
+    public int damage;
 
+    private Rigidbody2D rb;
     private GameObject player;
     private Collider2D enemyInRange;
+    private float timer;
 
 
     // Start is called before the first frame update
@@ -36,7 +38,11 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if(timer > 2)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public Transform OnGetEnemy()
@@ -61,5 +67,17 @@ public class BulletController : MonoBehaviour
             }
         }
         return enemy[id].transform;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        {
+
+        }
     }
 }

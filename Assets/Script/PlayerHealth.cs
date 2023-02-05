@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     {
         myRender = GetComponent<Renderer>();
         anim = GetComponent<Animator>();
+        HealthBar.HealthMax = health;
+        HealthBar.HealthCurrent = health;
     }
 
     // Update is called once per frame
@@ -27,6 +29,12 @@ public class PlayerHealth : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         health -= damage;
+        if(health < 0)
+        {
+            health = 0;
+        }
+        HealthBar.HealthCurrent = health;
+        
         if(health <= 0)
         {
             anim.SetTrigger("Die");

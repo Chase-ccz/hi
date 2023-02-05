@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D myFeet;
     private bool isGround;
     private bool canDoubleJump;
+    private PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +21,19 @@ public class PlayerController : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         myFeet = GetComponent<BoxCollider2D>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Flip();
-        Run();
-        Jump();
+        if(playerHealth.health > 0)
+        {
+            Run();
+            Jump();
+        }
+        
         CheckGround();
         SwitchAnimation();
         //Attack();
@@ -35,7 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void CheckGround()
     {
-        isGround = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        isGround = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground")) ||
+                   myFeet.IsTouchingLayers(LayerMask.GetMask("MovingPlatform")) ||
+                   myFeet.IsTouchingLayers(LayerMask.GetMask("OneWayPlatform"));
 ;    }
 
     void Flip()

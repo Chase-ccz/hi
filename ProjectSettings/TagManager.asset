@@ -15,12 +15,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Player
   - Ground
   - Enemy
-  - 
-  - 
-  - 
+  - Spike
+  - MovingPlatform
+  - OneWayPlatform
   - 
   - 
   - 
@@ -43,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 2748778023
+    locked: 0
+  - name: Ground
+    uniqueID: 3003452517
+    locked: 0
+  - name: Enemy
+    uniqueID: 2573695703
+    locked: 0
+  - name: Player
+    uniqueID: 63652663
     locked: 0

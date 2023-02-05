@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAutoAttack : MonoBehaviour
 {
     public float waitTime;
-    public GameObject bullet;
+    
 
     private BoxCollider2D collider2D;
     private Animator anim;
@@ -24,38 +24,23 @@ public class PlayerAutoAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(weaponState.weaponType);
-        if(weaponState.weaponType == "range")
-        {
-            timer += Time.deltaTime;
-
-            if(timer > 2)
-            {
-                timer = 0;
-                Shoot();
-            }
-
-        }
+        
     }
 
-    void Shoot()
-    {
-        //enemyInRange = Physics2D.OverlapCircle(transform.position, 100.0f,9);
-        //Debug.Log(enemyInRange);
-        Instantiate(bullet, transform.position, Quaternion.identity);
-    }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Enemy") && weaponState.weaponType == "melee")
         {
-            StartCoroutine(Attack());
+            //StartCoroutine(Attack());
+            anim.SetTrigger("Attack");
         }
     }
 
-    IEnumerator Attack()
-    {
-        anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(waitTime);
-    }
+
+    //IEnumerator Attack()
+    //{
+    //    anim.SetTrigger("Attack");
+    //    yield return new WaitForSeconds(waitTime);
+    //}
 }

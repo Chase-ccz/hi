@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isGround;
     private bool canDoubleJump;
     private PlayerHealth playerHealth;
+    private TouchJumpKey touchJump;
 
     Vector2 m_scenePos = new Vector2();
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         myAnim = GetComponent<Animator>();
         myFeet = GetComponent<BoxCollider2D>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
             //        }
             //    }
             //}
-            Jump();
+            //Jump();
             Debug.Log(joystick.Vertical);
         }
         
@@ -90,11 +92,11 @@ public class PlayerController : MonoBehaviour
         myAnim.SetBool("Run", playerHasXAxisSpeed);
     }
 
-    void Jump()
+    public void Jump()
     {
         //if (Input.GetButtonDown("Jump"))
-        if(joystick.Vertical >= 0.9)
-        {
+        //if(joystick.Vertical >= 0.9)
+        //{
             if (isGround)
             {
                 myAnim.SetBool("Jump", true);
@@ -113,7 +115,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-        }
+        //}
     }
 
     //void Attack()

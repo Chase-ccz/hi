@@ -6,7 +6,7 @@ public class TouchJumpKey : MonoBehaviour
 {
 
     private Transform jumpKey;
-    private bool isJump;
+    public bool isJump;
     private PlayerController player;
 
     // Start is called before the first frame update
@@ -46,10 +46,10 @@ public class TouchJumpKey : MonoBehaviour
         }
         else isJump = false;
         Debug.Log(isJump);
-        if(isJump == true)
-        {
-            player.Jump();
-        }
+        //if(isJump == true)
+        //{
+        //    player.Jump();
+        //}
     }
     
    

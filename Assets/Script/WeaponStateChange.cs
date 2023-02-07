@@ -16,9 +16,9 @@ public class WeaponStateChange : MonoBehaviour
         circleRenderer = circle.GetComponent<Renderer>();
         triangleRenderer = triangle.GetComponent<Renderer>();
 
-        circleRenderer.enabled = true;
-        triangleRenderer.enabled = false;
-        weaponType = "melee";
+        circleRenderer.enabled = false;
+        triangleRenderer.enabled = true;
+        weaponType = "range";
     }
 
     // Update is called once per frame

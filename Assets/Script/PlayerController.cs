@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth playerHealth;
     private TouchJumpKey touchJump;
 
-    Vector2 m_scenePos = new Vector2();
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +25,7 @@ public class PlayerController : MonoBehaviour
         myAnim = GetComponent<Animator>();
         myFeet = GetComponent<BoxCollider2D>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        touchJump = GameObject.FindGameObjectWithTag("JumpKey").GetComponent<TouchJumpKey>();
         
     }
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             //        }
             //    }
             //}
-            //Jump();
+            Jump();
             Debug.Log(joystick.Vertical);
         }
         
@@ -96,7 +96,8 @@ public class PlayerController : MonoBehaviour
     {
         //if (Input.GetButtonDown("Jump"))
         //if(joystick.Vertical >= 0.9)
-        //{
+        if(touchJump.isJump == true)
+        {
             if (isGround)
             {
                 myAnim.SetBool("Jump", true);
@@ -115,7 +116,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-        //}
+        }
     }
 
     //void Attack()

@@ -7,56 +7,53 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpSpeed;
     public float doubleJumpSpeed;
+    public float flashDistance;
     public Joystick joystick;
 
     private Rigidbody2D myRigidbody;
+    private Transform myTransform;
     private Animator myAnim;
     private BoxCollider2D myFeet;
-    private bool isGround;
+    public bool isGround;
     private bool canDoubleJump;
     private PlayerHealth playerHealth;
     private TouchJumpKey touchJump;
+    private TouchLeftSkillKey touchLeftSkillKey;
+    private TouchRightSkillKey touchRightSkillKey;
+    private float timer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myTransform = GetComponent<Transform>();
         myAnim = GetComponent<Animator>();
         myFeet = GetComponent<BoxCollider2D>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         touchJump = GameObject.FindGameObjectWithTag("JumpKey").GetComponent<TouchJumpKey>();
+        touchLeftSkillKey = GameObject.FindGameObjectWithTag("LeftSkillKey").GetComponent<TouchLeftSkillKey>();
+        touchRightSkillKey = GameObject.FindGameObjectWithTag("RightSkillKey").GetComponent<TouchRightSkillKey>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         Flip();
         if(playerHealth.health > 0)
         {
             Run();
-            //if(Input.touchCount == 1)
-            //{
-            //    if(Input.touches[0].phase == TouchPhase.Began)
-            //    {
-            //        m_scenePos = Input.touches[0].position;
-            //    }
-            //    if(Input.touches[0].phase == TouchPhase.Ended)
-            //    {
-            //        if(Input.touches[0].position == m_scenePos)
-            //        {
-            //            Jump();
-            //        }
-            //    }
-            //}
             Jump();
-            Debug.Log(joystick.Vertical);
+            if (timer > 2)
+            {
+                Flash();
+            }
         }
-        
+
         CheckGround();
         SwitchAnimation();
-        //Attack();
     }
 
     void CheckGround()
@@ -96,7 +93,7 @@ public class PlayerController : MonoBehaviour
     {
         //if (Input.GetButtonDown("Jump"))
         //if(joystick.Vertical >= 0.9)
-        if(touchJump.isJump == true)
+        if(touchJump.isJump == true && touchJump.ableJump == true)
         {
             if (isGround)
             {
@@ -104,6 +101,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
                 myRigidbody.velocity = Vector2.up * jumpVel;
                 canDoubleJump = false; //Ä¬ÈÏ½ûÓÃ¶þ¶ÎÌø
+                touchJump.ableJump = false;
             }
             else
             {
@@ -119,13 +117,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //void Attack()
-    //{
-    //    if (Input.GetButtonDown("Attack"))
-    //    {
-    //        myAnim.SetTrigger("Attack");
-    //    }
-    //}
+    public void Flash()
+    {
+        float moveDir = joystick.Horizontal;
+        if (touchLeftSkillKey.isLeftSkill == true)
+        {
+            myTransform.position = new Vector2(transform.position.x + moveDir * flashDistance, transform.position.y);
+            touchLeftSkillKey.isLeftSkill = false;
+            timer = 0;
+        }
+        //if (touchRightSkillKey.isRightSkill == true)
+        //{
+        //    myTransform.position = new Vector2(transform.position.x + flashDistance, transform.position.y);
+        //    timer = 0;
+        //}
+    }
 
     void SwitchAnimation()
     {

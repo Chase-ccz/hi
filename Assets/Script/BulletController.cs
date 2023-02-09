@@ -29,8 +29,8 @@ public class BulletController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         Vector3 direction = OnGetEnemy().position - transform.position;
-        Debug.Log(OnGetEnemy().position);
-        Debug.Log(transform.position);
+        //Debug.Log(OnGetEnemy().position);
+        //Debug.Log(transform.position);
         rb.velocity = new Vector2(direction.x, direction.y).normalized * bulletSpeed;
 
     }
@@ -39,7 +39,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > 2)
+        if (timer > 2)
         {
             Destroy(gameObject);
         }

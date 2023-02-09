@@ -24,16 +24,16 @@ public class WeaponStateChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Switcher();
+        //Switcher();
     }
 
     public void Switcher()
     {
-        if (Input.GetButtonDown("Switch") || Input.touchCount == 2)
-        {
-            circleRenderer.enabled = !circleRenderer.enabled;
-            triangleRenderer.enabled = !triangleRenderer.enabled;
-        }
+        //if (Input.GetButtonDown("Switch") || Input.touchCount == 2)
+        //{
+        circleRenderer.enabled = !circleRenderer.enabled;
+        triangleRenderer.enabled = !triangleRenderer.enabled;
+        //}
         if(circleRenderer.enabled == true)
         {
             weaponType = "melee";

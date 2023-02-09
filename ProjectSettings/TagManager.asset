@@ -8,6 +8,9 @@ TagManager:
   - CameraShake
   - WeaponState
   - JumpKey
+  - AdvanceShoot
+  - LeftSkillKey
+  - RightSkillKey
   layers:
   - Default
   - TransparentFX

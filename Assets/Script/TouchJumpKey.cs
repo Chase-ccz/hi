@@ -31,7 +31,8 @@ public class TouchJumpKey : MonoBehaviour
     void Update()
     {
         //判断是否触碰到跳跃键
-        if (Input.mousePosition.y >= jumpKey.transform.position.y - 50.0f && Input.touchCount == 1)
+        if (Input.mousePosition.y >= jumpKey.transform.position.y - 50.0f && Input.touchCount == 1) //打包正式用这个
+        //if (Input.mousePosition.y >= jumpKey.transform.position.y - 50.0f) //电脑测试用这个
         {
             isJump = true;
         }

@@ -49,15 +49,15 @@ public abstract class Enemy : MonoBehaviour
         sr.color = originalColor;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
-        {
-            if(playerHealth != null)
-            {
-                playerHealth.DamagePlayer(damage);
-            }
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+        
+    //    if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+    //    {
+    //        if(playerHealth != null)
+    //        {
+    //            playerHealth.DamagePlayer(damage);
+    //        }
+    //    }
+    //}
 }

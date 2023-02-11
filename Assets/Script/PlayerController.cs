@@ -40,20 +40,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
         Flip();
         if(playerHealth.health > 0)
         {
             Run();
             Jump();
-            if (timer > 2)
-            {
-                Flash();
-            }
+            //if (timer > 2)
+            //{
+            //    Flash();
+            //}
         }
 
         CheckGround();
         SwitchAnimation();
+        Debug.Log(isGround);
     }
 
     void CheckGround()

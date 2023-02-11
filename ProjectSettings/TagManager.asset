@@ -11,6 +11,7 @@ TagManager:
   - AdvanceShoot
   - LeftSkillKey
   - RightSkillKey
+  - ShootDetect
   layers:
   - Default
   - TransparentFX
